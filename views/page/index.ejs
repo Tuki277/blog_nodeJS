@@ -1,0 +1,40 @@
+<% include ../layout/header.ejs %>
+
+  <div id="main" role="main" class="container">
+    <div class="posts">
+      <% for (var i=0; i<post.length; i++) {%>
+      <article class="post">
+
+        <h1><a href="<%= post[i]._id %>"><%= post[i].title %></a></h1>
+
+        <div class="entry">
+          <p><%= (post[i].text).substring(0, 100) %></p>
+        </div>
+
+        <a href="<%= post[i]._id %>" class="read-more">Read More</a>
+      </article>
+      <% } %>
+      <article class="post">
+        <h1>Bài viết đầu tiên trên blog mới của tôi!</h1>
+
+        <div class="entry">
+            <p>Chào các bạn, tại thời điểm tôi viết blog này, tôi đang là 1 sinh viên, đang học NodeJS
+                và đây là project đầu tiên của tôi. Tôi viết bài viết này để kỉ niêm ngày <strong>18/7/2020</strong> là ngày mà 
+                blog này được ra đời, với mục đích chia sẻ những kinh nghiệm của tôi trong cuộc sống, trong quá 
+                trình học tập, các vấn đề trong các project mà tôi làm.</p>
+
+            <div class="language-python highlighter-rouge">
+                <div class="highlight">
+                    <pre class="highlight"><code><span class="k">console.log</span><span class="p">(</span><span class="s">'hello world'</span><span class="p">)</span>
+</code></pre>
+                </div>
+            </div>
+
+            <p>Tôi muốn làm một điều gì đó để thế giới tốt đẹp hơn. Và rất mong được sự ủng hộ của các bạn.</p>
+
+        </div>
+    </article>
+    </div>
+  </div>
+
+<% include ../layout/footer.ejs %>

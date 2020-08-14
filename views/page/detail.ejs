@@ -1,0 +1,17 @@
+<% include ../layout/header.ejs %>
+
+    <div id="main" role="main" class="container">
+        <div class="posts">
+            <% if (post) { %>
+                <article class="post">
+                    <h1><%= post.title %></h1>
+                    <div class="entry">
+                        <p><%= post.text %></p>
+                    </div>
+                </article>
+            <% } %>
+        </div>
+    </div>
+
+
+<% include ../layout/footer.ejs %>
