@@ -6,6 +6,7 @@ var logger = require('morgan');
 var connectDB = require('./config/db');
 var bodyParser = require('body-parser');
 const connectMySQL = require('./config/connectDatabaseMySQL')
+const cors = require('cors')
 let PORT = process.env.PORT || 5000;
 
 var indexRouter = require('./routes/index');
@@ -14,6 +15,7 @@ var addRouter = require('./routes/posts');
 var taskRouter = require('./routes/something')
 
 var app = express();
+app.use(cors())
 
 //kết nối csdl
 connectDB()
