@@ -8,20 +8,22 @@ const post = require('../models/post')
 
 // hien thi cac bai viet
 router.get('/', async(req, res) => {
-    const posts = await post.find().lean().sort();
-    console.log("day la index");
-    res.render('page/index', { post: posts })
+    try {
+        const posts = await post.find();
+        res.render('page/index', { post: posts })
+    } catch (error) {
+        console.log(error)
+    }
 });
 
-// Thu nghiem
 router.get('/add', (req, res) => {
     res.render('posts/add')
 });
 
 router.get('/:id', async(req, res) => {
-
-    const posts = await post.findOne({ _id: req.params.id }).lean()
-    res.render('page/detail', { post: posts, id: req.params.id })
+    const { id } = req.params;
+    const posts = await post.findOne({ _id: id }).lean()
+    res.render('page/detail', { post: posts, id })
 })
 
 //tao post moi

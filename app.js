@@ -5,20 +5,34 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var connectDB = require('./config/db');
 var bodyParser = require('body-parser');
-const connectMySQL = require('./config/connectDatabaseMySQL')
 const cors = require('cors')
 let PORT = process.env.PORT || 5000;
 
 var indexRouter = require('./routes/index');
 var aboutRouter = require('./routes/about');
 var addRouter = require('./routes/posts');
-var taskRouter = require('./routes/something')
 
 var app = express();
 app.use(cors())
 
 //kết nối csdl
 connectDB()
+
+var MongoClient = require('mongodb').MongoClient;
+// Connect to the db 
+MongoClient.connect("mongodb://als:abc1230-=@123.30.149.95:27017/?directConnection=true", { useUnifiedTopology: true, useNewUrlParser: true }, function(err, db) { 
+if(!err) { 
+   console.log("You are connected!"); 
+   var dbo = db.db("als");
+   var myobj = { name: "Company Inc", address: "Highway 37" };
+   dbo.collection("customers").insertOne(myobj, function(err, res) {
+    if (err) throw err;
+    console.log("1 document inserted");
+    db.close();
+  });
+   };
+      // db.close(); 
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,7 +47,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/', indexRouter);
 app.use('/about', aboutRouter);
 app.use('/', addRouter);
-app.use('/api', taskRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
